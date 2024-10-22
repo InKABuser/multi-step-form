@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Multi-step form</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="mainapp.js"></script>
+</head>
+<body>
+  <article>
+    <!-- Sidebar start -->
+    <aside id="Sidebar">
+      <ul>
+        <li><span class="round done">1</span><p><span>Step 1</span>Your info</p></li>
+        <li><span class="round done">2</span><p><span>Step 2</span>Select plan</p></li>
+        <li><span class="round done">3</span><p><span>Step 3</span>Add-ons</p></li>
+        <li><span class="round active">4</span><p><span>Step 4</span>Summary</p></li>
+      </ul>
+    </aside>
+    <!-- Sidebar end -->
+
+    <main>
+        <div class="main-text-holder">
+            <h1>Finishing up</h1>
+            <p>Double-check everything looks OK before confirming.</p>
+        </div>
+        <form action="">
+            <div data-location="Add-ons" class="card-holder">
+                <div class="summary-container">
+                    <div class="main-choice">
+                        <div class="main-choice-text">
+                            <p></p>
+                            <a href="select-plan.html">change</a>
+                        </div>
+                        <span class="main-plan-price"></span>
+                    </div>
+                    <div class="add-ons-choosen">
+                        <!-- <div class="item">
+                            <span class="type">local storage</span>
+                            <span class="price">9$</span>
+                        </div> -->
+                    </div>
+                </div>
+
+            </div>
+            <div class="total">
+                <p>Total <span class="per"></span></p>
+                <span class="total-money"></span>
+            </div>
+        </form>
+        <div class="btn-holder">
+            <button class="go-back">Go back</button>
+            <button data-location="Summary">Confirm</button>
+        </div>
+        <div class="just-for-transition">
+          <div class="thanks-container">
+            <img src="assets/images/icon-thank-you.svg" alt="thank you icon" class="thnaksImage">
+            <h1>Thank you!</h1>
+            <p>
+              Thanks for confirming your subscription! We hope you have fun 
+              using our platform. If you ever need support, please feel free 
+              to email us at support@loremgaming.com
+            </p>
+          </div>
+        </div>
+    </main>
+    <div data-outsise="true" class="btn-holder-outside">
+      <button class="go-back">Go back</button>
+      <button data-location="Summary">Confirm</button>
+    </div>
+  </article>
+  
+  
+  <!-- <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>. -->
+  </div>
+</body>
+</html>

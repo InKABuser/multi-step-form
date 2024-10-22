@@ -1,0 +1,664 @@
+@font-face {
+    font-family: 'Ubuntu-medium';
+    src: url(assets/fonts/Ubuntu-Medium.woff2) format("woff2");
+}
+@font-face {
+    font-family: "Ubuntu-bold";
+    src: url(assets/fonts/Ubuntu-Bold.woff2) format("woff2");
+}
+@font-face {
+    font-family: "Ubuntu-regular";
+    src: url(assets/fonts/Ubuntu-Regular.woff2);
+}
+
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  /*
+    2. Remove default margin
+  */
+  * {
+    margin: 0;
+  }
+  
+  /*
+    Typographic tweaks!
+    3. Add accessible line-height
+    4. Improve text rendering
+  */
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /*
+    5. Improve media defaults
+  */
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  
+  /*
+    6. Remove built-in form typography styles
+  */
+  input, button, textarea, select {
+    font: inherit;
+  }
+  
+  /*
+    7. Avoid text overflows
+  */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  
+  /*
+    8. Create a root stacking context
+  */
+  #root, #__next {
+    isolation: isolate;
+  }
+  :root{
+    --Marine-blue: hsl(213, 96%, 18%);
+    --Purplish-blue: hsl(243, 100%, 62%);
+    --Pastel-blue: hsl(228, 100%, 84%);
+    --Light-blue: hsl(206, 94%, 87%);
+    --Strawberry-red: hsl(354, 84%, 57%);
+
+    /* ### Neutral */
+    --Cool-gray: hsl(231, 11%, 63%);
+    --Light-gray: hsl(229, 24%, 87%);
+    --Magnolia: hsl(217, 100%, 97%);
+    --Alabaster: hsl(231, 100%, 99%);
+    --White: hsl(0, 0%, 100%);
+  }
+
+
+  /* main styles */
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: grid;
+    background-color: var(--Magnolia);
+    place-content: center;
+  }
+  article {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 4em;
+    height: 600px;
+    background-color: var(--White);
+    border-radius: 0.65em;
+
+    > .btn-holder-outside {
+      display: none;
+    }
+  }
+
+  #Sidebar {
+    background-image: url(assets/images/bg-sidebar-desktop.svg);
+    background-repeat: no-repeat;
+    
+    margin: 1em;
+    padding: 1em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: var(--Alabaster);
+    gap: 1em;
+    border-radius: .5em;
+    font-family: "Ubuntu-medium";
+    
+    > ul  {
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 1em;
+    }
+    > ul li {
+        list-style: none;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 1em;
+        align-items: center;
+    }
+    .round {
+        display: inline-flex;
+        width: 37px;
+        aspect-ratio: 1;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 100%;
+        border: 1px solid var(--Alabaster);
+    }
+    >ul li span {
+        display: block;
+        color: var(--Cool-gray);
+        text-transform: uppercase;
+        font-size: .8em;
+    }
+    > ul li p {
+        text-transform: uppercase;
+        color: var(--Alabaster);
+        font-size: .87em;
+    }
+  }
+  
+ @media screen and (max-width: 650px) {
+    #Sidebar {
+        width: 15vw;
+
+        > ul {
+            justify-content: center;
+        }
+        > ul li {
+            gap: 0;
+        }
+        >span:not(.round),p {
+            display: none;
+        }
+
+
+    }
+}
+
+@media screen and (max-width: 455px) {
+    body {
+        place-content: unset;
+    }
+    article {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 3fr;
+        background-color: var(--Magnolia);
+        position: relative;
+        min-height: 100dvh;
+
+        > .btn-holder-outside {
+          background-color: var(--White);
+          display: inherit;
+          place-self: end;
+          width: 100%;
+          padding: 1.5em;
+          display: flex;
+          justify-content: space-between;
+          
+          > button {
+            background-color: var(--Marine-blue);
+            border: none;
+            padding-inline: 1.3em;
+            padding-block: .5em;
+            color: var(--White);
+            font-size: .9em;
+            border-radius: .4em;
+            font-family: 'Ubuntu-regular';
+            cursor: pointer;
+          }
+          > button.go-back {
+            background-color: transparent;
+            border: none;
+            color: var(--Cool-gray);
+          }
+        }
+
+        >.btn-holder-outside[data-location = index] {
+          justify-content: end;
+        }
+    }
+    #Sidebar {
+      grid-row: 1;
+        background-image: url(assets/images/bg-sidebar-mobile.svg);
+        background-size: cover;
+        width: 100vw;
+        height: 100%;
+        flex-direction: row;
+        margin: 0;
+        border-radius: 0;
+        align-items: start;
+        justify-content: center;
+
+        > ul {
+            display: flex;
+            flex-direction: row;
+        }
+
+        >span:not(.round),p {
+            display: none;
+        }
+        .round {
+            width: 25px;
+            margin-block-start: 1em;
+        }
+    }
+
+
+}
+  .active {
+    background-color: var(--Light-blue);
+    color: var(--Marine-blue);
+  }
+
+  main[data-location = index] {
+    padding-inline-end: 4em;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    padding-block-start: 3em;
+    gap: .5em;
+    /* padding-inline: 4em; */
+    /* width: 60vw; */
+    
+    h1 {
+        font-size: 2em;
+        font-family: 'Ubuntu-bold';
+
+    }
+    p {
+        font-size: .9em;
+        color: var(--Cool-gray);
+        font-family: 'Ubuntu-regular';
+    }
+
+    > form {
+        margin-block-start: 1.5em;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 2.5em;
+        width: 80%;
+
+    }
+    .input-group {
+        display: grid;
+        gap: .5em;
+        
+        >input {
+            padding: .4em;
+            padding-inline: .9em;
+            border: 1px solid var(--Light-gray);
+            border-radius: .45em;
+        }
+        input[type = text]:focus, input[type = tel]:focus, input[type = email]:focus {
+          outline: none;
+        }
+        >input:invalid:not(:placeholder-shown) {
+          background-image: url(assets/images/iconmonstr-error-lined-240.png);
+          border: 2px solid var(--Strawberry-red);
+        }
+        input:valid:not(:placeholder-shown) {
+          background-image: url(assets/images/iconmonstr-check-mark-circle-lined-240.png);
+          border: 2px solid rgb(16, 219, 16);
+        }
+        >input:valid:not(:placeholder-shown),
+        input:invalid:not(:placeholder-shown) {
+          background-repeat: no-repeat;
+          background-size: 20px;
+          background-position: calc(100% - 10px);
+        }
+        >input:invalid ~ button {
+          opacity: 0.6;
+          pointer-events: none;
+        }
+
+        >label {
+            color: var(--Marine-blue);
+            font-family: 'Ubuntu-medium';
+            font-size: .8em;
+        }
+    }
+
+    .btn-holder {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+    }
+    button {
+        align-self: flex-end;
+        margin-block-start: 7em;
+        background-color: var(--Marine-blue);
+        border: none;
+        padding-inline: 1.3em;
+        padding-block: .5em;
+        color: var(--White);
+        font-size: .9em;
+        border-radius: .4em;
+        font-family: 'Ubuntu-regular';
+        cursor: pointer;
+    }
+
+
+    button.go-back {
+      background-color: transparent;
+      border: none;
+      color: var(--Cool-gray);
+    }
+
+    /* second page */
+    > form .card-holder {
+      display: flex;
+      gap: 1em;
+      width: 100%;
+
+      > .card {
+        position: relative;
+        border: 1px solid var(--Light-gray);
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        min-width: 30%;
+        flex-shrink: 1;
+        justify-content: space-between;
+        gap: 3em;
+        border-radius: .45em;
+
+        >img {
+          width: 40px;
+          aspect-ratio: 1;
+        }
+        .card-text {
+          width: 100%;
+          
+          >p {
+            font-family: 'Ubuntu-bold';
+            color: var(--Marine-blue);
+            >span {
+              display: block;
+              color: var(--Cool-gray);
+              font-family: 'Ubuntu-medium';
+            }
+          }
+          >.yearly-only {
+            display: none;
+            color: var(--Marine-blue);
+            font-size: .8em;
+            font-family: "Ubuntu-regular";
+          }
+        }
+        > input[type = radio] {
+          position: absolute;
+          opacity: 0;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+        }
+      }
+      > .card:has(input[type = radio]:checked) {
+        border: 1.5px solid var(--Purplish-blue);
+        background-color: var(--Magnolia);
+      }
+      > .card:is(:hover, :active, :focus, :checked) {
+        cursor: pointer;
+        border: 1.5px solid var(--Purplish-blue);
+        background-color: var(--Magnolia);
+    }
+    }
+    > form .card-holder[data-location = Add-ons] {
+      flex-direction: column;
+      /* width: 80%; */
+
+      > .card {
+        display: grid;
+        grid-template-columns: 1fr min-content;
+        align-items: center;
+        justify-items: end;
+        gap: 1em;
+
+        > span {
+          width: fit-content;
+          text-align: end;
+          color: var(--Cool-gray);
+        }
+
+        > .checkbox-content {
+          gap: 1em;
+          justify-self: start;
+          display: grid;
+          grid-template-columns: min-content 1fr;
+
+          > input[type=checkbox] {
+            accent-color: var(--Purplish-blue);
+            width: 1.07em;
+          }
+          >.checkbox-text {
+            display: flex;
+            flex-direction: column;
+            
+            >p {
+              color: var(--Marine-blue);
+              font-family: "Ubuntu-bold";
+            }
+
+            > p span {
+              display: block;
+              font-family: "Ubuntu-medium";
+              color: var(--Cool-gray);
+            }
+          }
+        }
+      }
+      >.card:has(input[type=checkbox]:checked) {
+        border: 2px solid var(--Purplish-blue);
+        background-color: var(--Magnolia);
+      }
+    }
+    > form .billing {
+      width: 92%;
+      display: flex;
+      padding: 1em;
+      justify-content: space-around;
+      align-items: center;
+      background-color: var(--Magnolia);
+      text-transform: uppercase;
+      font-family: 'Ubuntu-bold';
+      font-size: .8em;
+
+      > .monthly {
+        color: var(--Marine-blue);
+      }
+      > .yearly {
+        color: var(--Light-gray);
+      }
+    }
+
+    >form .summary-container {
+      display: grid;
+      padding: 1em;
+      gap: 1em;
+      background-color: var(--Magnolia);
+
+      >.main-choice {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em;
+        border-bottom: 1px solid var(--Light-gray);
+
+        >.main-plan-price {
+          font-family: 'Ubuntu-bold';
+          color: var(--Marine-blue);
+        }
+
+        >.main-choice-text {
+
+          >p {
+            color: var(--Marine-blue);
+            font-family: 'Ubuntu-bold';
+            font-size: 1.1em;
+          }
+        }
+        >span {
+          display: block;
+        }
+
+      }
+
+      >.add-ons-choosen {
+        display: grid;
+        padding-inline: 1em;
+        gap: 1em;
+
+        >.item {
+          color: var(--Cool-gray);
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+    >.just-for-transition {
+      place-self: center;
+      transform: scale(0);
+      /* transition: grid-template-rows 500ms ease; */
+      transition: transform 700ms cubic-bezier(1, 0.09, 0.55, 1.28);
+
+      >.thanks-container {
+        display: none;
+        min-height: 0;
+        place-self: center;
+        place-items: center;
+        gap: 1.5em;
+        transition: 300ms ease;
+  
+        >p {
+          max-width: 50ch;
+        }
+      }
+    }
+    >.just-for-transition.open {
+      transform: scale(100%);
+    }
+    >form .total {
+      padding-inline: 2em;
+      display: flex;
+      justify-content: space-between;
+
+      >.total-money {
+        font-family: 'Ubuntu-bold';
+        color: var(--Marine-blue);
+      }
+    }
+  }
+  @media screen and (max-width: 770px) {
+    main {
+        padding-inline: 0;
+
+
+        button {
+            margin-block-start: 4em;
+        }
+        > form .card-holder {
+          gap: .2em;
+        }
+
+    }
+  }
+
+  @media screen and (max-width: 455px) {
+    main {  
+      display: grid;
+      position: absolute;
+      top: 5em;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0 auto;
+      background-color: var(--White);
+      width: 85vw;
+      padding: 1.5em;
+      border-radius: .45em;
+      
+      >form {
+        width: 100%;
+      }
+        .btn-holder {
+          display: none;
+        }
+        
+        > form .card-holder {
+          flex-direction: column;
+
+          >.card {
+            flex-direction: row;
+            justify-content: unset;
+            gap: 1em;
+          }
+        }
+    }
+  }
+
+  /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 19px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2196F3;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(15px);
+  -ms-transform: translateX(15px);
+  transform: translateX(15px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* important */
+
+button[data-location = index],button[data-location = select],button[data-location = add-ons]{
+  pointer-events: none;
+  opacity: 0.6;
+}
